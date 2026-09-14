@@ -168,6 +168,11 @@ const APPROACH_SURFACE = '#121212';
 /** Home [Selected Work]: full index on Work page */
 const FEATURED_WORK_IDS = ['investing', 'autosync', 'mi'];
 
+/** Shared frame for every section and the fixed nav. Below 1440 this is a no-op and
+ *  the page stays full-bleed; above it everything centres together, so the layout
+ *  can't drift apart the way it did when only one section was constrained. */
+const PAGE_FRAME = 'mx-auto w-full max-w-[1440px]';
+
 /** Muted labels on dark UI (mono tags, years, section markers, approach subheads).
  *  4.72:1 on #1a1a1a — these render at 11-12px, so they need the AA 4.5 floor. */
 const MUTED_ON_DARK = '#858585';
@@ -260,7 +265,7 @@ function ProjectListRow({
             empty but for the rule. It's the sharpest copy on the page, so it earns
             that space instead. */}
         <p
-          className="hidden min-w-0 max-w-md text-xs leading-relaxed md:block md:mr-auto"
+          className="hidden min-w-0 max-w-[620px] text-xs leading-relaxed md:block md:mr-auto"
           style={{ ...monoStyle, letterSpacing: '0em', color: MUTED_ON_DARK }}
         >
           {project.subtext}
@@ -870,13 +875,14 @@ export default function Portfolio() {
       {!detailProject && (
       <>
       {/* Nav - 좌측 로고 */}
-      <nav className="fixed left-0 top-0 z-50 p-4 sm:p-8">
+      <nav className="pointer-events-none fixed inset-x-0 top-0 z-50">
+        <div className={`${PAGE_FRAME} p-4 sm:p-8`}>
         <button
           type="button"
           onClick={() => setView('home')}
           onMouseEnter={() => setLogoHovered(true)}
           onMouseLeave={() => setLogoHovered(false)}
-          className="flex min-h-[44px] min-w-[44px] touch-manipulation items-center gap-1 sm:min-h-0 sm:min-w-0"
+          className="pointer-events-auto flex min-h-[44px] min-w-[44px] touch-manipulation items-center gap-1 sm:min-h-0 sm:min-w-0"
         >
           <div className="rounded-full" style={{ backgroundColor: TEXT_LIGHT_ON_DARK, width: '18px', height: '18px' }} />
           <div className="rounded-full flex items-center justify-center gap-0.5" style={{ backgroundColor: TEXT_LIGHT_ON_DARK, width: '18px', height: '18px' }}>
@@ -900,11 +906,16 @@ export default function Portfolio() {
             />
           </div>
         </button>
+        </div>
       </nav>
 
       {/* Nav - 메뉴 */}
-      <nav className="fixed left-[52%] top-0 z-50 max-w-[calc(100vw-7rem)] p-4 sm:left-[55%] sm:max-w-none sm:p-8">
-        <div className="nav-stack text-xs" style={monoStyle}>
+      <nav className="pointer-events-none fixed inset-x-0 top-0 z-50">
+        <div className={`${PAGE_FRAME} p-4 sm:p-8`}>
+        <div
+          className="nav-stack pointer-events-auto ml-[52%] max-w-[calc(100vw-7rem)] text-xs sm:ml-[55%] sm:max-w-none"
+          style={monoStyle}
+        >
           {[
             { key: 'work', label: 'Work', page: 'work' },
             { key: 'about', label: 'About', page: 'about' },
@@ -1013,14 +1024,19 @@ export default function Portfolio() {
             );
           })}
         </div>
+        </div>
       </nav>
 
       {/* Top-right meta: year on other views; site name on home */}
-      <div
-        className="fixed right-4 top-4 z-50 text-[10px] sm:right-8 sm:top-8 sm:text-xs"
-        style={{ ...monoStyle, color: MUTED_ON_DARK }}
-      >
-        {view === 'home' ? 'Inkchoidesign' : '2026'}
+      <div className="pointer-events-none fixed inset-x-0 top-0 z-50">
+        <div className={`${PAGE_FRAME} p-4 sm:p-8`}>
+          <div
+            className="text-right text-[10px] sm:text-xs"
+            style={{ ...monoStyle, color: MUTED_ON_DARK }}
+          >
+            {view === 'home' ? 'Inkchoidesign' : '2026'}
+          </div>
+        </div>
       </div>
       </>
       )}
@@ -1028,7 +1044,7 @@ export default function Portfolio() {
       {view === 'home' && (
         <>
           {/* Hero Section */}
-          <section className="hero-section flex h-screen flex-col justify-between px-4 py-6 sm:px-8 sm:py-8">
+          <section className={`hero-section ${PAGE_FRAME} flex h-screen flex-col justify-between px-4 py-6 sm:px-8 sm:py-8`}>
             <div
               className="flex-1 flex flex-col md:flex-row md:items-center gap-10"
               style={{
@@ -1114,7 +1130,7 @@ export default function Portfolio() {
           <section
             ref={projectsSectionRef}
             data-section="projects"
-            className="relative z-10 px-4 pb-36 pt-48 sm:px-8"
+            className={`relative z-10 ${PAGE_FRAME} px-4 pb-36 pt-48 sm:px-8`}
           >
             <div
               className="mb-16"
@@ -1165,7 +1181,7 @@ export default function Portfolio() {
               className="relative z-0 -mx-4 mt-12 mb-12 overflow-hidden sm:-mx-8"
               style={{ backgroundColor: APPROACH_SURFACE }}
             >
-              <section className="relative z-10 w-full px-4 pb-40 pt-40 sm:px-8 md:pb-48 md:pt-48 lg:pb-[14rem] lg:pt-[14rem]">
+              <section className={`relative z-10 ${PAGE_FRAME} px-4 pb-40 pt-40 sm:px-8 md:pb-48 md:pt-48 lg:pb-[14rem] lg:pt-[14rem]`}>
                 <div className="grid w-full grid-cols-1 items-start gap-12 text-left md:gap-14">
                   <div className="min-w-0 max-w-[42rem]">
                     <h2 className="mb-4 text-xs" style={{ ...monoStyle, color: MUTED_ON_DARK }}>
