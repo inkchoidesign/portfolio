@@ -171,7 +171,7 @@ const FEATURED_WORK_IDS = ['investing', 'autosync', 'mi'];
 /** Shared frame for every section and the fixed nav. Below 1440 this is a no-op and
  *  the page stays full-bleed; above it everything centres together, so the layout
  *  can't drift apart the way it did when only one section was constrained. */
-const PAGE_FRAME = 'mx-auto w-full max-w-[1440px]';
+const PAGE_FRAME = 'mx-auto w-full max-w-[1680px]';
 
 /** Muted labels on dark UI (mono tags, years, section markers, approach subheads).
  *  4.72:1 on #1a1a1a — these render at 11-12px, so they need the AA 4.5 floor. */
@@ -372,6 +372,20 @@ export default function Portfolio() {
   const detailOverlayRef = useRef(null);
   const detailSheetOpenRef = useRef(false);
   const prevDetailIdRef = useRef(null);
+
+  /* Press "g" to toggle a 12-column grid overlay for checking alignment across
+     the page (skip while typing in a form field). */
+  const [gridVisible, setGridVisible] = useState(false);
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key !== 'g' && e.key !== 'G') return;
+      const tag = e.target?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target?.isContentEditable) return;
+      setGridVisible((v) => !v);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, []);
 
   useEffect(() => {
     detailSheetOpenRef.current = detailSheetOpen;
@@ -872,6 +886,15 @@ export default function Portfolio() {
 
   return (
     <div className="relative min-w-0 w-full" style={{ backgroundColor: '#1a1a1a' }}>
+      {gridVisible && (
+        <div className="pointer-events-none fixed inset-0 z-[100]">
+          <div className={`${PAGE_FRAME} grid h-full grid-cols-12 gap-4 px-4 sm:gap-6 sm:px-8`}>
+            {Array.from({ length: 12 }).map((_, i) => (
+              <div key={i} style={{ backgroundColor: 'rgba(255,0,0,0.12)' }} />
+            ))}
+          </div>
+        </div>
+      )}
       {!detailProject && (
       <>
       {/* Nav - 좌측 로고 */}
@@ -1283,7 +1306,7 @@ export default function Portfolio() {
 
       {view === 'work' && (
         <div className="relative z-10" style={{ backgroundColor: '#1a1a1a' }}>
-          <section className="flex min-h-screen flex-col justify-center px-4 pb-8 pt-28 sm:px-8 md:pt-32">
+          <section className={`flex min-h-screen flex-col justify-center ${PAGE_FRAME} px-4 pb-8 pt-28 sm:px-8 md:pt-32`}>
             <div
               ref={workHeroParallaxRef}
               style={{
@@ -1366,7 +1389,7 @@ export default function Portfolio() {
 
           <section
             ref={workFooterRef}
-            className="border-t border-[#2a2a2a] px-4 py-24 sm:px-8 md:py-32"
+            className={`border-t border-[#2a2a2a] ${PAGE_FRAME} px-4 py-24 sm:px-8 md:py-32`}
             style={{ backgroundColor: '#1a1a1a' }}
           >
             <h2
@@ -1458,7 +1481,7 @@ export default function Portfolio() {
 
       {view === 'about' && (
         <div className="relative z-10 h-screen w-full min-w-0 overflow-hidden" style={{ backgroundColor: '#1a1a1a' }}>
-          <section className="relative z-10 w-full min-w-0 px-4 pb-32 pt-28 sm:px-8 md:pb-40 md:pt-32">
+          <section className={`relative z-10 w-full min-w-0 ${PAGE_FRAME} px-4 pb-32 pt-28 sm:px-8 md:pb-40 md:pt-32`}>
             <div className="grid w-full min-w-0 grid-cols-1 gap-16 lg:grid-cols-[minmax(0,2.85fr)_minmax(0,1fr)] lg:items-start lg:gap-16 xl:gap-24">
               <div
                 className="min-w-0 lg:sticky lg:top-28 lg:self-start"
