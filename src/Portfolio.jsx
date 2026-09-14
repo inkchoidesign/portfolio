@@ -17,7 +17,7 @@ const TEXT_LIGHT_ON_DARK = '#ebe8e4';
 
 /** Shared outer styles for all `[ Label ]` text CTAs (mono brackets) */
 const CTA_BRACKET_CLASS =
-  'inline-flex w-fit max-w-full cursor-pointer items-center border-0 bg-transparent p-0 text-left no-underline transition-opacity hover:no-underline hover:opacity-60 visited:text-inherit focus:outline-none';
+  'tap-target inline-flex w-fit max-w-full cursor-pointer touch-manipulation items-center border-0 bg-transparent p-0 text-left no-underline transition-opacity hover:no-underline hover:opacity-60 visited:text-inherit focus:outline-none';
 /** Link-style CTA text on dark UI: one step darker than primary text. */
 const CTA_TEXT_ON_DARK = '#9a9a9a';
 
@@ -166,12 +166,13 @@ const fadeUpStyle = (isVisible) => ({
 const APPROACH_SURFACE = '#121212';
 
 /** Home [Selected Work]: full index on Work page */
-const FEATURED_WORK_IDS = ['investing', 'autosync', 'honda'];
+const FEATURED_WORK_IDS = ['investing', 'autosync', 'mi'];
 
-/** Muted labels on dark UI (mono tags, years, section markers, approach subheads) */
-const MUTED_ON_DARK = '#6b6b6b';
-/** Body copy on dark UI (one step brighter for readability) */
-const BODY_ON_DARK = '#878787';
+/** Muted labels on dark UI (mono tags, years, section markers, approach subheads).
+ *  4.72:1 on #1a1a1a — these render at 11-12px, so they need the AA 4.5 floor. */
+const MUTED_ON_DARK = '#858585';
+/** Body copy on dark UI (one step brighter, keeps the muted/body hierarchy readable) */
+const BODY_ON_DARK = '#9a9a9a';
 
 function ProjectListRow({
   project,
@@ -202,7 +203,9 @@ function ProjectListRow({
       }}
     >
       <div className="flex justify-between items-start md:items-center gap-8">
-        <div className="flex items-start md:items-center gap-8 min-w-0 flex-1">
+        {/* Hugs its content on desktop so the subtext sits next to the title instead
+            of being pushed to the far edge by a stretched title column. */}
+        <div className="flex items-start md:items-center gap-8 min-w-0 flex-1 md:flex-none">
           <span
             className="text-xs shrink-0 tabular-nums pt-1 md:pt-0"
             style={{ ...monoStyle, color: MUTED_ON_DARK }}
@@ -253,6 +256,15 @@ function ProjectListRow({
             </p>
           </div>
         </div>
+        {/* On desktop this line was hidden, leaving the middle of a full-bleed row
+            empty but for the rule. It's the sharpest copy on the page, so it earns
+            that space instead. */}
+        <p
+          className="hidden min-w-0 max-w-md text-xs leading-relaxed md:block md:mr-auto"
+          style={{ ...monoStyle, letterSpacing: '0em', color: MUTED_ON_DARK }}
+        >
+          {project.subtext}
+        </p>
         <div className="flex items-center gap-8 shrink-0 pt-1 md:pt-0">
           <span
             className="text-xs hidden md:block"
@@ -754,7 +766,7 @@ export default function Portfolio() {
     setHoveredProject(projectId);
   };
 
-  const projects = [
+  const allProjects = [
     {
       id: 'investing',
       num: '001',
@@ -791,8 +803,25 @@ export default function Portfolio() {
       )
     },
     {
-      id: 'genesis',
+      id: 'mi',
       num: '003',
+      title: 'MotoInsight',
+      gallerySrc: 'images/motoinsight-work-thumbnail.png',
+      galleryHoverSrc: 'images/motoinsight-home-thumbnail.png',
+      subtext: 'Aligning brand across marketing and web experiences',
+      tag: 'Brand · Marketing',
+      year: '2023',
+      thumb: (
+        <img
+          src="images/motoinsight-home-thumbnail.png"
+          alt=""
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        />
+      )
+    },
+    {
+      id: 'genesis',
+      num: '004',
       title: 'Genesis',
       gallerySrc: 'images/genesis-work-thumbnail.png',
       galleryHoverSrc: 'images/genesis-home-thumbnail.png',
@@ -809,7 +838,7 @@ export default function Portfolio() {
     },
     {
       id: 'honda',
-      num: '004',
+      num: '005',
       title: 'Honda Preorder',
       gallerySrc: 'images/honda-work-thumbnail.png',
       galleryHoverSrc: 'images/honda-home-thumbnail.png',
@@ -823,25 +852,14 @@ export default function Portfolio() {
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
       )
-    },
-    {
-      id: 'mi',
-      num: '005',
-      title: 'MotoInsight',
-      gallerySrc: 'images/motoinsight-work-thumbnail.png',
-      galleryHoverSrc: 'images/motoinsight-home-thumbnail.png',
-      subtext: 'Aligning brand across marketing and web experiences',
-      tag: 'Brand · Marketing',
-      year: '2023',
-      thumb: (
-        <img
-          src="images/motoinsight-home-thumbnail.png"
-          alt=""
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-        />
-      )
     }
   ];
+
+  /* Only the three featured case studies are published. Genesis and Honda stay in
+     allProjects so the work isn't lost, but they're excluded everywhere until their
+     case studies are written — otherwise the work gallery and the "next project"
+     link would lead to pages that still show [ placeholder ] copy. */
+  const projects = allProjects.filter((p) => FEATURED_WORK_IDS.includes(p.id));
 
   const featuredProjects = FEATURED_WORK_IDS.map((id) =>
     projects.find((p) => p.id === id)
@@ -886,7 +904,7 @@ export default function Portfolio() {
 
       {/* Nav - 메뉴 */}
       <nav className="fixed left-[52%] top-0 z-50 max-w-[calc(100vw-7rem)] p-4 sm:left-[55%] sm:max-w-none sm:p-8">
-        <div className="space-y-2 text-xs" style={monoStyle}>
+        <div className="nav-stack text-xs" style={monoStyle}>
           {[
             { key: 'work', label: 'Work', page: 'work' },
             { key: 'about', label: 'About', page: 'about' },
@@ -903,13 +921,21 @@ export default function Portfolio() {
             const hoverText = displayText;
 
             const navLinePx = 18;
+            /* Outer element carries no overflow clip: it would also clip the
+               .tap-target hit area down to 18px on touch devices. */
             const navItemStyle = {
               position: 'relative',
               height: `${navLinePx}px`,
-              overflow: 'hidden',
               whiteSpace: 'nowrap',
               textDecoration: 'none',
               color: 'inherit'
+            };
+            /* Inner box does the roll-up clipping and anchors the second line. */
+            const navClipStyle = {
+              display: 'block',
+              position: 'relative',
+              height: `${navLinePx}px`,
+              overflow: 'hidden'
             };
 
             const navLineStyle = {
@@ -921,7 +947,7 @@ export default function Portfolio() {
             };
 
             const navItemBody = (
-              <>
+              <span style={navClipStyle}>
                 <span
                   style={{
                     ...navLineStyle,
@@ -946,7 +972,7 @@ export default function Portfolio() {
                   {(isActive || isHovered) && '■ '}
                   {hoverText}
                 </span>
-              </>
+              </span>
             );
 
             if (item.href) {
@@ -959,7 +985,7 @@ export default function Portfolio() {
                     : {})}
                   onMouseEnter={() => setHoveredMenu(item.key)}
                   onMouseLeave={() => setHoveredMenu(null)}
-                  className="block min-w-0 max-w-full cursor-pointer text-left no-underline transition-opacity hover:opacity-100 sm:min-w-[120px]"
+                  className="tap-target block min-w-0 max-w-full cursor-pointer touch-manipulation text-left no-underline transition-opacity hover:opacity-100 sm:min-w-[120px]"
                   style={navItemStyle}
                 >
                   {navItemBody}
@@ -979,7 +1005,7 @@ export default function Portfolio() {
                 }}
                 onMouseEnter={() => setHoveredMenu(item.key)}
                 onMouseLeave={() => setHoveredMenu(null)}
-                className="block min-w-0 max-w-full text-left sm:min-w-[120px]"
+                className="tap-target block min-w-0 max-w-full touch-manipulation text-left sm:min-w-[120px]"
                 style={navItemStyle}
               >
                 {navItemBody}
@@ -1002,15 +1028,17 @@ export default function Portfolio() {
       {view === 'home' && (
         <>
           {/* Hero Section */}
-          <section className="flex h-screen flex-col justify-between px-4 py-6 sm:px-8 sm:py-8">
-            <div 
-              className="flex-1 flex items-center"
+          <section className="hero-section flex h-screen flex-col justify-between px-4 py-6 sm:px-8 sm:py-8">
+            <div
+              className="flex-1 flex flex-col md:flex-row md:items-center gap-10"
               style={{
                 transform: `translateY(${scrollY * -0.3}px)`,
                 transition: 'transform 0.1s ease-out'
               }}
             >
-              <div>
+              {/* Needs ~711px for the headline's intended two-line break; capped at
+                  3xl so the paragraph underneath keeps a readable measure. */}
+              <div className="min-w-0 md:max-w-3xl md:flex-[0_1_768px]">
                 <h1
                   className="text-2xl md:text-4xl leading-tight max-w-5xl"
                   style={{
@@ -1053,16 +1081,19 @@ export default function Portfolio() {
                     The job: take a half-formed direction and make it concrete.
                   </span>
                 </p>
-                <div
-                  className="mt-10 w-full max-w-3xl"
-                  style={{
-                    opacity: homeLoaded ? 1 : 0,
-                    transform: homeLoaded ? 'translateY(0)' : 'translateY(30px)',
-                    transition: 'opacity 1s ease 0.35s, transform 1s ease 0.35s'
-                  }}
-                >
-                  <MetaballAnimation bgHex="#1a1a1a" mode="animation2" />
-                </div>
+              </div>
+              <div
+                /* Absorbs whatever the text column leaves, so the headline always gets
+                   its ~711px two-line measure first and no dead gap opens up on wide
+                   screens. Fixed percentages broke at 1536 and ballooned past 2000. */
+                className="mt-10 w-full min-w-0 md:mt-0 md:min-w-[280px] md:flex-[1_1_0%]"
+                style={{
+                  opacity: homeLoaded ? 1 : 0,
+                  transform: homeLoaded ? 'translateY(0)' : 'translateY(30px)',
+                  transition: 'opacity 1s ease 0.35s, transform 1s ease 0.35s'
+                }}
+              >
+                <MetaballAnimation bgHex="#1a1a1a" mode="animation2" />
               </div>
             </div>
             <div
@@ -1085,7 +1116,7 @@ export default function Portfolio() {
             data-section="projects"
             className="relative z-10 px-4 pb-36 pt-48 sm:px-8"
           >
-            <div 
+            <div
               className="mb-16"
               style={{
                 opacity: projectsVisible ? 1 : 0,
@@ -1093,7 +1124,7 @@ export default function Portfolio() {
                 transition: 'opacity 0.8s ease, transform 0.8s ease'
               }}
             >
-              <p className="text-xs" style={{ ...monoStyle, color: MUTED_ON_DARK }}>Selected Work</p>
+              <h2 className="text-xs" style={{ ...monoStyle, color: MUTED_ON_DARK }}>Selected Work</h2>
             </div>
             
             <div>
@@ -1134,12 +1165,12 @@ export default function Portfolio() {
               className="relative z-0 -mx-4 mt-12 mb-12 overflow-hidden sm:-mx-8"
               style={{ backgroundColor: APPROACH_SURFACE }}
             >
-              <section className="relative z-10 w-full px-4 pb-40 pt-40 sm:px-8 md:pb-48 md:pt-48 lg:px-10 lg:pb-[14rem] lg:pt-[14rem] xl:px-12">
+              <section className="relative z-10 w-full px-4 pb-40 pt-40 sm:px-8 md:pb-48 md:pt-48 lg:pb-[14rem] lg:pt-[14rem]">
                 <div className="grid w-full grid-cols-1 items-start gap-12 text-left md:gap-14">
-                  <div className="min-w-0 max-w-3xl">
-                    <p className="mb-4 text-xs" style={{ ...monoStyle, color: MUTED_ON_DARK }}>
+                  <div className="min-w-0 max-w-[42rem]">
+                    <h2 className="mb-4 text-xs" style={{ ...monoStyle, color: MUTED_ON_DARK }}>
                       Process
-                    </p>
+                    </h2>
                     <p
                       className="text-base leading-[1.65] md:text-lg"
                       style={{ ...titleStyle, fontWeight: 400, color: BODY_ON_DARK }}
@@ -1157,7 +1188,10 @@ export default function Portfolio() {
                       }
                     </p>
                   </div>
-                  <div className="min-w-0">
+                  {/* Three parallel ideas, each one short line. Stacked full-width
+                      they left most of the row empty; side by side they fill it and
+                      read as the comparison they are. */}
+                  <div className="grid min-w-0 gap-10 md:grid-cols-3 md:gap-14">
                     <div className="pb-6">
                       <p
                         className="text-base md:text-lg"
@@ -1287,7 +1321,7 @@ export default function Portfolio() {
                     className="pointer-events-none shrink-0 text-center text-xs leading-normal"
                     style={{ ...monoStyle, color: MUTED_ON_DARK }}
                   >
-                    5 Featured Projects
+                    {projects.length} Featured Projects
                   </p>
                   <div className="w-full min-h-0 min-w-0 shrink overflow-hidden">
                     <div

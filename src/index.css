@@ -21,3 +21,45 @@ body {
 [data-section] {
   will-change: transform, opacity;
 }
+
+/* Small mono links (nav items, [ bracket ] CTAs) render at 16-18px tall, which is
+   well under the 44px touch minimum. This grows the hit area with a centred
+   pseudo-element so the visual box and the surrounding rhythm stay untouched.
+   Pointer-precision query keeps it to touch devices only. */
+/* Owns the nav item spacing outright: Tailwind's space-y-* rule carries higher
+   specificity, so the touch override below could never win against it. */
+.nav-stack > * + * {
+  margin-top: 8px;
+}
+
+@media (pointer: coarse) {
+  .tap-target {
+    position: relative;
+    /* Lifts the hit area above adjacent unpositioned siblings, which would
+       otherwise paint over it and swallow the tap. */
+    z-index: 1;
+  }
+
+  .tap-target::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    min-height: 44px;
+    height: 100%;
+  }
+
+  /* Stacked nav items sit on a 26px pitch, so neighbouring 44px hit areas would
+     overlap and eat each other. Open the stack up to a 44px pitch on touch. */
+  .nav-stack > * + * {
+    margin-top: 26px;
+  }
+
+  /* That taller nav (~138px) sits fixed over the hero, which only reserved 24px
+     of top padding — the headline ran underneath the menu. */
+  .hero-section {
+    padding-top: 160px;
+  }
+}
