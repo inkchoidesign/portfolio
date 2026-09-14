@@ -759,15 +759,15 @@ export default function Portfolio() {
       id: 'investing',
       num: '001',
       title: 'Intelligent Investing',
-      gallerySrc: '/images/investing-work-thumbnail.png',
-      galleryHoverSrc: '/images/investing-home-thumbnail.png',
+      gallerySrc: 'images/investing-work-thumbnail.png',
+      galleryHoverSrc: 'images/investing-home-thumbnail.png',
       subtext:
         'Not a buy button. A space to decide.',
       tag: 'Product · Platform',
       year: '2025',
       thumb: (
         <img
-          src="/images/investing-home-thumbnail.png"
+          src="images/investing-home-thumbnail.png"
           alt=""
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
@@ -777,14 +777,14 @@ export default function Portfolio() {
       id: 'autosync',
       num: '002',
       title: 'AutoSync Branding',
-      gallerySrc: '/images/autosync-work-thumbnail.png',
-      galleryHoverSrc: '/images/autosync-home-thumbnail.png',
+      gallerySrc: 'images/autosync-work-thumbnail.png',
+      galleryHoverSrc: 'images/autosync-home-thumbnail.png',
       subtext: 'Not just a logo, but a system that could hold products that didn\'t fully exist yet.',
       tag: 'Brand System',
       year: '2023',
       thumb: (
         <img
-          src="/images/autosync-home-thumbnail.png"
+          src="images/autosync-home-thumbnail.png"
           alt=""
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
@@ -794,14 +794,14 @@ export default function Portfolio() {
       id: 'genesis',
       num: '003',
       title: 'Genesis',
-      gallerySrc: '/images/genesis-work-thumbnail.png',
-      galleryHoverSrc: '/images/genesis-home-thumbnail.png',
+      gallerySrc: 'images/genesis-work-thumbnail.png',
+      galleryHoverSrc: 'images/genesis-home-thumbnail.png',
       subtext: 'Improving product flow clarity across complex user journeys',
       tag: 'UX · Product',
       year: '2024',
       thumb: (
         <img
-          src="/images/genesis-home-thumbnail.png"
+          src="images/genesis-home-thumbnail.png"
           alt=""
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
@@ -811,14 +811,14 @@ export default function Portfolio() {
       id: 'honda',
       num: '004',
       title: 'Honda Preorder',
-      gallerySrc: '/images/honda-work-thumbnail.png',
-      galleryHoverSrc: '/images/honda-home-thumbnail.png',
+      gallerySrc: 'images/honda-work-thumbnail.png',
+      galleryHoverSrc: 'images/honda-home-thumbnail.png',
       subtext: "A pre-order flow most people didn't finish. The job was finding where it broke.",
       tag: 'UX · Journey',
       year: '2024',
       thumb: (
         <img
-          src="/images/honda-home-thumbnail.png"
+          src="images/honda-home-thumbnail.png"
           alt=""
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
@@ -828,14 +828,14 @@ export default function Portfolio() {
       id: 'mi',
       num: '005',
       title: 'MotoInsight',
-      gallerySrc: '/images/motoinsight-work-thumbnail.png',
-      galleryHoverSrc: '/images/motoinsight-home-thumbnail.png',
+      gallerySrc: 'images/motoinsight-work-thumbnail.png',
+      galleryHoverSrc: 'images/motoinsight-home-thumbnail.png',
       subtext: 'Aligning brand across marketing and web experiences',
       tag: 'Brand · Marketing',
       year: '2023',
       thumb: (
         <img
-          src="/images/motoinsight-home-thumbnail.png"
+          src="images/motoinsight-home-thumbnail.png"
           alt=""
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
@@ -1659,7 +1659,7 @@ const CASE_STUDIES = {
     scope: 'Brand · Product · Design System · App architecture',
     deliverables:
       'Native app on iOS and Android. Severe-mode design system. The Manual. Onboarding signature.',
-    heroImage: '/images/investing-work-thumbnail.png',
+    heroImage: 'images/investing-work-thumbnail.png',
 
     // 01 — The Situation
     contextHeadline: 'What everyone else is solving for.',
@@ -1686,7 +1686,7 @@ const CASE_STUDIES = {
       'No green. No red. Sign and label carry the meaning. Color is for legibility, not emotion. Cutting the most familiar fintech signal is a statement of posture before it is a design decision.',
       'The dashboard’s commercial job is the State 6 to State 7 transition. State 6 is the most common existing user. Capital in the account, Core portfolio sitting inactive. State 7 is the target. Same capital, Core active, projection arc forward. Activation here does not mean more trading. It means the user has moved onto the slower, supervised path. The word flips. From “do more” to “stand on the right default.”'
     ],
-    dashboardImage: '/images/investing-dashboard-detail.png',
+    dashboardImage: 'images/investing-dashboard-detail.png',
 
     // 02b — Gates (doctrine moments across the app)
     gatesKicker: 'Same doctrine. Different scale.',
@@ -1695,31 +1695,31 @@ const CASE_STUDIES = {
         title: 'Signature trio at sign-up',
         body:
           'Three doctrine moments before the first action. Calibration. A philosophy screen the user has to clear before account creation. Deliberate Proceed. A 1000ms hold built into the confirmation. Final Transition. The last screen of onboarding: “You’ve joined the few who invest with intention.” The first action of the product is selection, not welcome.',
-        image: '/images/investing-signup-final.png'
+        image: 'images/investing-signup-final.png'
       },
       {
         title: 'Decision language',
         body:
           'The buttons get new names. Not Buy. Initiate Position. Not Sell. Reduce Exposure. The words the user taps every day stop being verbs of activity. They become labels for a decision.',
-        image: '/images/investing-capital-decision.png'
+        image: 'images/investing-capital-decision.png'
       },
       {
         title: 'Slow defaults',
         body:
           'The buy flow defaults to Limit, not Market. The most common fintech default, flipped on purpose. Transitions hold for 120 to 180 milliseconds before they start. Deliberate Proceed waits a full second. None of this is loading. It is the system making space for the call.',
-        image: '/images/investing-buy-limit.png'
+        image: 'images/investing-buy-limit.png'
       },
       {
         title: 'No green. No red.',
         body:
           'The fintech default reads gain and loss in color. The system removes that signal. Sign and label do the work. Color is reserved for legibility. The hardest visual constraint to hold becomes the most quoted line in the doctrine. If a color feels expressive, it is wrong.',
-        image: '/images/investing-closed-positions.png'
+        image: 'images/investing-closed-positions.png'
       },
       {
         title: 'Hidden vs Disabled',
         body:
           'Even failure states stay disciplined. A five-minute identity review disables the action button. It will come back. A pending account closure hides the button entirely. It will not. Disabled and hidden are not the same word here. The system never offers false hope.',
-        image: '/images/investing-states-comparison.png'
+        image: 'images/investing-states-comparison.png'
       }
     ],
 
@@ -2044,7 +2044,7 @@ function CaseStudy({ project, projects, monoStyle, titleStyle, onOpenProject }) 
         <div className={`mb-12 w-full min-w-0 sm:mb-14 md:mb-16 ${WORK_PAGE_GUTTER_X}`}>
           <PlaceholderFrame
             label="[ Image ]"
-            src="/images/autosync-p1.png"
+            src="images/autosync-p1.png"
             monoStyle={monoStyle}
             aspectClass=""
             borderless
