@@ -239,40 +239,40 @@ const ABOUT_EXPERIENCE = [
 
 /** Why experience matters: range and judgment, not seniority. */
 const ABOUT_JUDGMENT_COPY = [
-  'Working across different industries and formats made me less attached to any single medium and more focused on choosing the right response to the problem.',
-  'Experience, to me, is not about repeating what has worked before. It is about having a wider range of references, recognizing patterns faster, and being more flexible about the form a solution can take.'
+  'I have designed for car dealers and carmakers, for six software companies becoming one division, for a memorial company in print, and now for an investing app. Each needed a different form: a guideline, a hexagon, a trade show booth, a dashboard. What carried over was the first question. What does this brand stand for?',
+  'So experience, to me, is range. I have met the same problem on paper, on a website and inside a product, and I recognize it sooner each time.'
 ];
 
 const ABOUT_JUDGMENT_KO = [
-  '다양한 산업과 형식을 넘나들며 일하면서, 어느 하나의 매체에 덜 얽매이고 문제에 맞는 대응을 고르는 데 더 집중하게 되었다.',
-  '내게 경험이란 효과가 있었던 방식을 반복하는 것이 아니다. 더 넓은 레퍼런스를 갖고, 패턴을 더 빨리 알아보고, 해법이 취할 수 있는 형태에 더 유연해지는 것이다.'
+  '자동차 딜러와 제조사, 하나의 디비전으로 합쳐지는 소프트웨어 회사 여섯 곳, 인쇄물을 만드는 메모리얼 회사, 그리고 지금은 투자 앱. 필요한 형태는 매번 달랐다. 가이드라인, 헥사곤, 전시 부스, 대시보드. 그대로 이어진 것은 첫 질문이었다. 이 브랜드는 무엇을 위한 것인가?',
+  '그래서 내게 경험은 범위다. 같은 문제를 종이 위에서, 웹사이트에서, 제품 안에서 만나 봤고, 그래서 매번 더 빨리 알아본다.'
 ];
 
 /** Capabilities: large categories, not a discipline checklist. */
 const ABOUT_CAPABILITIES = [
   {
-    label: 'Positioning',
-    copy: 'Identity systems, product direction, visual language',
-    ko: { label: '포지셔닝', copy: '아이덴티티 시스템, 제품 방향, 비주얼 언어' }
+    label: 'Brand',
+    copy: 'Logos and identity systems, from the AutoSync hexagon to the Intelligent Investing symbol, and guidelines teams use on their own',
+    ko: { label: '브랜드', copy: 'AutoSync의 헥사곤부터 Intelligent Investing의 심볼까지, 로고와 아이덴티티 시스템, 그리고 팀이 스스로 쓰는 가이드라인' }
   },
   {
-    label: 'Experience',
-    copy: 'Digital products, websites, campaigns, physical touchpoints',
-    ko: { label: '경험', copy: '디지털 제품, 웹사이트, 캠페인, 물리적 접점' }
+    label: 'Product and web',
+    copy: 'Product UI and design systems, websites built in code, and white-label work in each carmaker’s brand',
+    ko: { label: '제품과 웹', copy: '프로덕트 UI와 디자인 시스템, 코드로 만든 웹사이트, 그리고 각 자동차 제조사 브랜드에 맞춘 화이트라벨 작업' }
   },
   {
-    label: 'Ways of working',
-    copy: 'Prototyping, systems thinking, AI-assisted exploration and production',
-    ko: { label: '일하는 방식', copy: '프로토타이핑, 시스템 사고, AI를 활용한 탐색과 제작' }
+    label: 'Communication',
+    copy: 'Campaigns, reels and carousels, sales materials, trade shows and the office',
+    ko: { label: '커뮤니케이션', copy: '캠페인, 릴스와 캐러셀, 영업 자료, 전시회, 그리고 사무실' }
   }
 ];
 
 /** Tools framed as evolving method, not a separate "AI-first" positioning. */
 const ABOUT_TOOLS_COPY = [
-  'My practice has moved through print, digital, product, code, and now AI-assisted workflows. I adopt new tools when they help me explore more broadly, test ideas faster, or produce more effectively. The tool itself is never the point.'
+  'I started in print, moved to the web and to product, and now work in code and with AI. When the numbers matter, I prototype in code on real data and hand engineering working HTML. AI produces the options quickly. I make the call.'
 ];
 const ABOUT_TOOLS_KO = [
-  '내 작업은 인쇄, 디지털, 제품, 코드를 거쳐 이제 AI를 활용한 워크플로까지 이어졌다. 새로운 도구는 더 넓게 탐색하고, 아이디어를 더 빨리 검증하고, 더 효과적으로 만들어 내는 데 도움이 될 때 도입한다. 도구 자체가 핵심인 적은 없다.'
+  '인쇄에서 시작해 웹과 제품으로 옮겨 왔고, 지금은 코드와 AI로 일한다. 숫자가 중요할 때는 실제 데이터로 코드 프로토타입을 만들고, 엔지니어링에는 작동하는 HTML을 넘긴다. AI는 안을 빠르게 만든다. 결정은 내가 한다.'
 ];
 
 /** Case study overlay / full-width card captions: fluid horizontal gutters */
@@ -1753,7 +1753,7 @@ export default function Portfolio() {
               too, not only on touch where index.css already pads it. From md up the same
               pt-28 (112px) matches the bottom row (80px CTA + 32px padding), so the
               text and the orbit sit on the screen's true vertical centre. */}
-          <section className={`relative hero-section ${PAGE_FRAME} flex min-h-[100svh] flex-col justify-between px-4 py-6 pt-28 sm:px-8 sm:py-8 sm:pt-28`}>
+          <section className={`relative hero-section ${PAGE_FRAME} flex min-h-[100svh] flex-col justify-between overflow-x-clip px-4 py-6 pt-28 sm:px-8 sm:py-8 sm:pt-28`}>
             <div
               className="flex-1 flex flex-col md:flex-row md:items-center gap-10"
               style={{
@@ -1810,7 +1810,7 @@ export default function Portfolio() {
               </div>
               <div
                 /* Cols 8-12 on the frame grid (see HERO_ART_COL). */
-                className={`mx-auto mt-2 w-[min(100%,calc(100svh-500px))] min-w-0 md:mx-0 md:mt-0 md:w-full ${HERO_ART_COL}`}
+                className={`mt-2 ml-[calc((100%_-_min(125%,calc(100svh_-_450px)))/2)] w-[min(125%,calc(100svh-450px))] min-w-0 max-[379px]:ml-[calc((100%_-_min(100%,calc(100svh_-_500px)))/2)] max-[379px]:w-[min(100%,calc(100svh-500px))] md:ml-0 md:mt-0 md:w-full ${HERO_ART_COL}`}
                 style={{
                   opacity: homeLoaded ? 1 : 0,
                   transform: homeLoaded ? 'translateY(0)' : 'translateY(30px)',
@@ -2201,7 +2201,7 @@ export default function Portfolio() {
                     className="text-lg leading-relaxed md:text-xl"
                     style={{ ...titleStyle, color: DETAIL_UI.title }}
                   >
-                    <L en={<>The principles stay fairly constant. The tools don&apos;t.</>} ko="원칙은 대체로 변하지 않는다. 도구는 변한다." />
+                    <L en={<>The question stays. The tools change.</>} ko="질문은 그대로다. 도구는 바뀐다." />
                   </p>
                   {ABOUT_TOOLS_COPY.map((p, i) => (
                     <p
