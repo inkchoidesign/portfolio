@@ -156,7 +156,7 @@ const ABOUT_EXPERIENCE = [
   {
     role: 'Brand Designer',
     org: 'Orion Digital',
-    period: 'Apr 2024 · Present',
+    period: 'Apr 2025 · Present',
     summary: 'Shaping the company across product, brand, web, and communication as the business evolved.',
     bullets: [
       'Contributed to UI/UX direction across digital touchpoints',
@@ -165,7 +165,7 @@ const ABOUT_EXPERIENCE = [
     ],
     ko: {
       role: '브랜드 디자이너',
-      period: '2024.04 · 현재',
+      period: '2025.04 · 현재',
       summary: '사업이 변화하는 동안 제품, 브랜드, 웹, 커뮤니케이션 전반에서 회사의 모습을 만들었다.',
       bullets: [
         '디지털 접점 전반의 UI/UX 방향에 기여',
@@ -177,7 +177,7 @@ const ABOUT_EXPERIENCE = [
   {
     role: 'Visual Designer',
     org: 'TRADER (AutoSync)',
-    period: '2022 · 2024',
+    period: '2022 · 2025',
     summary: 'Building structure and a visual system for a product ecosystem that was still taking shape.',
     bullets: [
       'Delivered landing and campaign experiences',
@@ -193,7 +193,7 @@ const ABOUT_EXPERIENCE = [
   {
     role: 'Visual Designer',
     org: 'Motoinsight',
-    period: '2018 · 2022',
+    period: '2018 · 2021',
     summary: 'Bringing brand, marketing, and digital experiences into one coherent system across touchpoints.',
     bullets: [
       'Produced branded assets across web and campaigns',
@@ -1347,7 +1347,7 @@ export default function Portfolio() {
   const allProjects = [
     {
       id: 'investing',
-      period: '2024–Now', // matches the About experience entry
+      period: '2025–Now', // matches the About experience entry
       num: '01',
       title: 'Intelligent Investing',
       gallerySrc: 'images/investing-work-thumb3.png',
@@ -1376,7 +1376,7 @@ export default function Portfolio() {
     },
     {
       id: 'autosync',
-      period: '2022–24', // matches the About experience entry
+      period: '2022–25', // matches the About experience entry
       num: '02',
       title: 'AutoSync Branding',
       gallerySrc: 'images/autosync-work-thumbnail.png',
@@ -1405,7 +1405,7 @@ export default function Portfolio() {
     },
     {
       id: 'mi',
-      period: '2018–22', // matches the About experience entry
+      period: '2018–21', // matches the About experience entry
       num: '03',
       title: 'MotoInsight',
       gallerySrc: 'images/motoinsight-work-thumbnail.png',
@@ -3615,7 +3615,7 @@ function InvestingCase({ monoStyle, titleStyle }) {
               <InvHeroMark paused={!playing} color={u.title} className="h-8 w-auto" />
             </button>
           <p className="m-0 text-left text-3xl leading-[1.2] md:text-right md:text-[48px]" style={{ ...titleStyle, color: u.title }}>
-            <span style={{ fontWeight: 400 }}>{t('2024–Now', '2024–현재')}</span>
+            <span style={{ fontWeight: 400 }}>{t('2025–Now', '2025–현재')}</span>
             <br />
             <span style={{ fontWeight: 600 }}>Intelligent Investing</span>
           </p>
@@ -3625,7 +3625,7 @@ function InvestingCase({ monoStyle, titleStyle }) {
         <div className={`${frame} mt-20 md:mt-64`}>
           <div className={grid}>
             <p className={`col-span-12 mb-6 md:col-span-3 md:mb-0 md:pt-4 ${labelCls}`} style={labelStyle}>
-              {t('2024–Now', '2024–현재')} · Intelligent Investing
+              {t('2025–Now', '2025–현재')} · Intelligent Investing
             </p>
             <div className="col-span-12 md:col-span-9 md:col-start-4">
               <div ref={headRef}>
@@ -4357,7 +4357,7 @@ function AutoSyncCase({ monoStyle, titleStyle }) {
       <header style={{ backgroundColor: WHITE }}>
         <CaseHero
           monoStyle={monoStyle} titleStyle={titleStyle} metaItems={metaItems}
-          years="2022–2024" name="AutoSync" label="2022–2024 · AutoSync"
+          years="2022–2025" name="AutoSync" label="2022–2025 · AutoSync"
           mark={<CaseHeroMark kind="hexagon" color={u.title} className="h-9 w-auto md:h-12" />}
           headline={<L en={<>Six products.<br />One thread.</>} ko={<>제품 여섯 개.<br />실 하나.</>} />}
           body={t('AutoSync, a division of Trader, brought six automotive software products together: TRFFK, TAdvantage, MotoInsight, EasyDeal, Activix and vAuto. On my own, I defined and built the brand framework that holds them together while each keeps its identity.', 'Trader의 디비전인 AutoSync는 자동차 소프트웨어 여섯 개를 한데 모았다. TRFFK, TAdvantage, MotoInsight, EasyDeal, Activix, vAuto. 나는 각자의 정체성을 지키면서 여섯을 하나로 묶는 브랜드 프레임워크를 혼자 정의하고 만들었다.')}
@@ -4500,7 +4500,7 @@ function MotoInsightCase({ monoStyle, titleStyle }) {
       <header style={{ backgroundColor: WHITE }}>
         <CaseHero
           monoStyle={monoStyle} titleStyle={titleStyle} metaItems={metaItems}
-          years="2018–2022" name="MotoInsight" label="2018–2022 · MotoInsight"
+          years="2018–2021" name="MotoInsight" label="2018–2021 · MotoInsight"
           mark={<CaseHeroMark kind="m" color={u.title} className="h-9 w-auto md:h-12" />}
           headline={<L en={<>A logo.<br />No brand.</>} ko={<>로고는 있었다.<br />브랜드는 없었다.</>} />}
           body={t('MotoInsight had a logo and product designers, but no one for the brand or marketing. As the only visual designer, I built the brand into a system and carried it across every touchpoint: guidelines, sales and marketing materials, the website, events and the office.', 'MotoInsight에는 로고와 프로덕트 디자이너들이 있었지만, 브랜드와 마케팅을 맡을 사람은 없었다. 유일한 비주얼 디자이너로서 나는 브랜드를 시스템으로 만들고 모든 접점으로 가져갔다. 가이드라인, 영업과 마케팅 자료, 웹사이트, 이벤트, 그리고 사무실까지.')}
