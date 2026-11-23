@@ -1810,7 +1810,7 @@ export default function Portfolio() {
               </div>
               <div
                 /* Cols 8-12 on the frame grid (see HERO_ART_COL). */
-                className={`mt-2 ml-[calc((100%_-_min(125%,calc(100svh_-_450px)))/2)] w-[min(125%,calc(100svh-450px))] min-w-0 max-[379px]:ml-[calc((100%_-_min(100%,calc(100svh_-_500px)))/2)] max-[379px]:w-[min(100%,calc(100svh-500px))] md:ml-0 md:mt-0 md:w-full ${HERO_ART_COL}`}
+                className={`mt-2 ml-[calc((100%_-_min(125%,calc(100svh_-_450px)))/2)] w-[min(125%,calc(100svh-450px))] min-w-0 max-[379px]:ml-[calc((100%_-_min(100%,calc(100svh_-_500px)))/2)] max-[379px]:w-[min(100%,calc(100svh-500px))] md:mt-0 ${HERO_ART_COL}`}
                 style={{
                   opacity: homeLoaded ? 1 : 0,
                   transform: homeLoaded ? 'translateY(0)' : 'translateY(30px)',
