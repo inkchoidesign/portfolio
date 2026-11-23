@@ -1,100 +1,78 @@
-# Portfolio — 작업 인수인계
+# Portfolio v3 — 작업 인수인계
 
-마지막 갱신: 2026-09-14
+마지막 갱신: 2026-10-26
 
-목표: **이직용 포트폴리오.** 3개 케이스 스터디를 깊게 보여주는 구성.
-경력 나열 대신 깊이로 시니어리티를 증명하는 방향.
+v2 를 정리해서 만든 버전. 이전 기록·아카이브는 `../v2/` 에 그대로 있다 (v2 는 동결).
 
 ---
 
-## 새 컴퓨터에서 시작하기
+## 포지션 (확정 2026-10-25)
+
+- **Brand Designer.** *I decide what a brand stands for, then build it into everything it touches: product, campaign, pitch.*
+- 무기 = 일관성이 아니라 판단: 믿음을 결정으로, 결정을 화면으로. 브랜드 · 프로덕트 · 마케팅을 한 사람이 끝까지.
+- 케이스 틀 = **믿음 → 결정 → 화면**. 경력보다 문제 해결.
+- AI(Claude) 는 무기로 내세우지 않는다. 툴 목록 + 과정 안 한 줄씩, 결과 중심, 판단은 사람.
+
+---
+
+## v2 에서 뺀 것
+
+| 뺀 것 | 이유 |
+|---|---|
+| `node_modules/`, `dist/` | 복원 가능 (`npm install`, `npm run build`) |
+| `_archive/` (24MB) | v2 에 보관 |
+| `_mockups/`, `_drafts/` | 확정분만 `_reference/` 로 |
+| Genesis · Honda (코드 + 이미지) | 본문 없는 placeholder, 화면에 안 보이던 것 |
+| `.DS_Store` | 불필요 |
+
+`.git` 은 그대로 가져왔다 (히스토리 · remote 유지). v2 에 커밋 안 된 변경이 있었으므로 v3 의 `git status` 에 그 차이가 보인다.
+
+---
+
+## 001 Intelligent Investing (새 케이스)
+
+- 주제 = 퍼포먼스 대시보드 + II 브랜드. 원본 근거: II Work `Product Design_work files/Brand Review/` 덱 01, V20 프로토타입.
+- 설계 원본: `_reference/investing-case-mockup.html` · 카피: `_reference/investing-case-draft.md`
+- 이미지: `public/images/investing-p1~p4-*.jpg` (V20 캡처, 390 폭 2x, 폰 한 화면)
+- 숫자는 전부 V20 렌더값 (Portfolio +39.4% / S&P +45.2% / Alpha −5.8 pp, NVDA · KO · VZ 행). 지어낸 숫자 금지.
+
+### `[CONFIRM]` 남은 것
+1. 팀 구성 (CEO, two designers, engineering?)
+2. 플랫폼 · 출시 여부 (iOS / Android live?)
+3. Outcome 2개 (출시, 엔지니어 핸드오프, 테스트 신호)
+4. Brand 섹션 이미지 3장 (가입 S&P 비교 · 랜딩 · 캠페인)
+
+---
+
+## 디자인 결정 (10-25 ~ 10-26)
+
+- **색:** 흑백 + 코랄 레드 `#F2483A` (`CTA_CORAL`, CSS `--coral`) 하나뿐.
+  - 쓰는 곳 3곳: 히로 오른쪽 아래 원형 CTA (아래 화살표, 누르면 작업 목록) · 네비 현재/호버 ■ 6px (`NavMark`) · CTA 화살표 호버.
+  - 본문 글자·큰 선에는 금지. "problem" 같은 제목 단어에도 안 씀 (오류처럼 읽힘, 대비 깨짐).
+  - 히로 바뀌는 단어 = 흰색 모노체 (`HERO_WORD_FONT`). Process 진행 선 = 흰색. 파랑·로즈 골드는 시도 후 폐기.
+  - II 케이스 안의 골드·초록·빨강은 II 제품 색이라 사이트 색과 섞지 않음.
+- **히로:** 제목 "The ___ changes." 단어 롤업 순환 (medium/logo/app/screen/deck/brand, 모두 medium 이하 폭 → 2줄 유지). 제목 크기 = 컬럼 비례 (`.hero-title`, 최대 60px). 메타볼 = 8–12컬럼, 궤도 가로 1.4배·덩어리 1.3배, 시작 = 노이즈에서 떠오르기 (디더 밀도 0→1), 스크롤 시 퍼지며 사라짐. 기각된 것: 두 점(몸으로 읽힘)·도넛·평면 원형(스피너)·구 하나에서 갈라짐(애벌레).
+- **히로 배경:** 물감 영상 (Pixabay 22908) 흑백·좌우 반전·밝은 부분만 압축, 투명도 45% + 그레인 레이어. 원본은 `Footage/` (git 제외).
+- **Process:** 메타볼 캔버스 하나가 흩어짐 → 한 덩어리 → 떨어진 같은 구 4개. 아이콘 글리프 폐기 (`ProcessGlyph.jsx` 삭제, v2 에 원본).
+- **홈 정리 (10-28):** 배경 두 가지만 = 어두움 #1a1a1a(히로·Statement) / 크림 #ebe8e4(작업·Process), 번갈아. 히로 물감 영상 → 정지 프레임 30% + 그레인. Selected Work 행에 썸네일 항상 표시(데스크탑 cols 10–12, 모바일 제목 위), 커서 미리보기 삭제. Process 비주얼 = 궤도(WorkAnimation pose, 크림 위 어두운 잉크). 히로 서브 = "Brand designer. I decide what a brand stands for, then build it into the product and the communication." Statement 라벨 = Ink Choi · Brand Designer, 인물 = 흑백 영상(ink-portrait-bw.mp4).
+- **구조 (10-27):** 페이지는 홈 하나. Work 페이지 삭제. 네비 Work = 작업 목록으로 스크롤, About = Statement(Ink Choi)로 스크롤, Contact = 메일. 전체 About(경력 + 본문 두 섹션)은 Process `[ About ↗ ]` 로 디테일 시트에 열림 (밝은 배경). 순서: 히로 → 작업 → Statement → Process.
+- **Process:** 레이아웃·옆 애니메이션 미확정, 베리에이션 비교 필요.
+- **글자 스케일 (10-27):** 히로 57.5 (`.hero-title`, 홈·케이스 공통) → 페이지 제목 48 → 섹션 제목 36 → 서브 제목 20 → 본문 18 (소개 문단 20, 모노 서브 14). 모바일: 30 / 36 / 24 / 20 / 18. 새 값 추가 금지.
+- **한글:** `k` 키 또는 `?ko` = 본인 확인용 읽기 카피. UI 에 표시 없음.
+
+## 다음 순서
+
+1. II 케이스 `[CONFIRM]` 채우기
+2. 히로 · About 카피를 포지션 기준으로
+3. 빠른 수정: LinkedIn 링크 (`linkedin.com` 루트로 감), 이력서 링크
+4. AutoSync · MotoInsight 본문 (같은 틀)
+5. 배포 전: Tailwind 빌드 포함, 호스팅 결정
+
+## 시작
 
 ```bash
-git clone https://github.com/inkchoidesign/portfolio.git
-cd portfolio
 npm install
-npm run dev     # http://localhost:5173
+npm run dev
 ```
 
-`node_modules`는 git에 없습니다(의도된 것). `npm install`로 복원하세요.
-
-### 주의
-
-- **`npm install`을 반드시 새로 하세요.** 예전 컴퓨터의 `node_modules`를 복사하면
-  `@rollup/rollup-win32-x64-msvc` 누락으로 vite가 안 뜹니다.
-- **루트 `index.html`은 더블클릭으로 안 열립니다.** Vite 진입점이라 정상입니다.
-  빌드 결과물은 `dist/index.html`이고, 이건 더블클릭으로 열립니다.
-- OneDrive 동기화 폴더라 HTML이 조용히 잘리는 사고가 있었습니다. 파일이
-  이상하면 끝에 `</html>`이 있는지 확인하세요.
-
----
-
-## 현재 상태
-
-### 공개되는 프로젝트 3개
-
-`FEATURED_WORK_IDS` (Portfolio.jsx 상단) 한 줄이 단일 출처입니다.
-
-| 번호 | 프로젝트 | 증명하는 축 | 본문 |
-|---|---|---|---|
-| 001 | Intelligent Investing | Product · Platform | **완성** (1,025단어) |
-| 002 | AutoSync Branding | Brand System | **미작성** |
-| 003 | MotoInsight | Brand · Marketing | **미작성** |
-
-Genesis, Honda는 `allProjects`에 남아 있지만 화면 전체에서 제외됩니다.
-둘 다 `[ Situation headline ]` 같은 placeholder 상태라, 노출하면 작업 갤러리와
-케이스 스터디의 "Next project" 링크가 빈 페이지로 연결됩니다.
-본문을 쓰면 `FEATURED_WORK_IDS`에 id를 추가하는 것만으로 되살아납니다.
-
-### 이미지 — 전부 임시입니다
-
-`public/images/`의 썸네일은 **정식 자산이 아닙니다.** 원본이 유실돼서 Cursor의
-로컬 스냅샷 캐시에서 복구한 스크린샷입니다. 화면이 안 깨지게 자리만 채운 상태예요.
-정식 이미지가 준비되면 **같은 파일명으로 덮어쓰면 됩니다** (코드 수정 불필요).
-
-아직 없는 이미지 6개 (Investing 상세 페이지용):
-`investing-dashboard-detail`, `investing-signup-final`, `investing-capital-decision`,
-`investing-buy-limit`, `investing-closed-positions`, `investing-states-comparison`
-
-`src/MetaballAnimation.jsx`(히어로 애니메이션)도 같은 경위로 복구된 파일입니다.
-
----
-
-## 남은 일 (우선순위 순)
-
-1. **AutoSync · MotoInsight 케이스 스터디 본문** — 이직 관점에서 가장 큰 미완성 항목.
-   템플릿 구조(`CASE_STUDIES`)는 이미 있고 Investing이 작성 예시입니다.
-2. **Tailwind를 빌드에 포함** — 현재 `index.html`에서 CDN 런타임 로드라,
-   네트워크가 느리거나 막히면 스타일이 통째로 안 뜹니다. 배포 전 필수.
-3. **호스팅 결정** — 보류 중. `.github/workflows/deploy.yml`(GitHub Pages)과
-   `netlify.toml` 둘 다 준비돼 있어 어느 쪽이든 바로 됩니다.
-   무료로 주소를 예쁘게 하려면 Netlify(`inkchoidesign.netlify.app`)가 쉽습니다.
-4. 남은 이미지 6개
-
----
-
-## 디자인 판단 기준 (합의된 것)
-
-- **풀위스 유지.** 섹션 max-width 컨테이너 없이 좌우 32px 여백.
-  한 섹션만 컨테이너를 넣었다가 정렬이 233px 어긋나서 되돌린 이력이 있습니다.
-- **Work 행은 목차(index) 패턴.** 좌측에 번호·제목·한 줄 설명을 붙이고,
-  우측 메타데이터 앞에 리더 공간을 둡니다.
-- **히어로 제목은 2줄.** 한 줄에 약 711px가 필요합니다. 텍스트 컬럼이 이보다
-  좁아지면 3줄로 깨집니다 — 메타볼 폭을 퍼센트로 고정하면 특정 해상도에서
-  이 문제가 재발합니다 (현재는 텍스트가 폭을 먼저 확보하는 flex 구조).
-- **색 대비.** 모노 라벨 `#858585`(4.72:1), 본문 `#9a9a9a`(6.19:1).
-  11~12px 텍스트라 4.5:1 기준을 지켜야 합니다. 더 어둡게 내리지 마세요.
-- **탭 타겟 44px.** `.tap-target` 클래스가 `(pointer: coarse)`에서만 의사요소로
-  히트 영역을 키웁니다. 데스크탑 롤업 애니메이션에 영향 없습니다.
-
----
-
-## 작업 시 함정
-
-- **리빌 애니메이션 때문에 측정이 틀립니다.** 스크롤 기반 IntersectionObserver라
-  자동화 브라우저에서 요소가 opacity 0으로 잡힙니다. 측정 전에 강제로 표시하세요:
-  `document.head.insertAdjacentHTML('beforeend','<style>*{opacity:1!important;transform:none!important}</style>')`
-- **뷰포트 밖 요소는 `elementFromPoint`가 null을 반환합니다.** 히트 영역을 잴 때
-  `scrollIntoView` 먼저 하세요. 이걸 놓쳐서 오측정한 적 있습니다.
-- **편집 중간 상태에서 HMR 500 에러가 콘솔에 남습니다.** 빌드가 통과하면
-  실제 에러가 아닙니다. `npm run build`로 확인하세요.
+함정 (v2 HANDOFF 에서 이어짐): 리빌 애니메이션 때문에 자동 측정 시 opacity 0 으로 잡힌다. OneDrive 가 HTML 을 조용히 자를 수 있다 (끝 `</html>` 확인).

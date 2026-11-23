@@ -9,8 +9,14 @@ import react from '@vitejs/plugin-react'
 const plainScriptTag = () => ({
   name: 'plain-script-tag',
   enforce: 'post',
+  /* The bundle keeps a fixed name (assets/index.js) so file:// keeps working,
+     which means browsers cache it across builds and show stale pages after a
+     rebuild. A build-time query string busts that without renaming the file. */
   transformIndexHtml: (html) =>
-    html.replace(/<script type="module" crossorigin src=/g, '<script defer src='),
+    html.replace(
+      /<script type="module" crossorigin src="([^"]+)"/g,
+      (_, src) => `<script defer src="${src}?v=${Date.now().toString(36)}"`
+    ),
 })
 
 export default defineConfig({

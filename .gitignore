@@ -1,3 +1,12 @@
 node_modules/
 dist/
 .DS_Store
+
+# raw source footage (web encodes live in public/video)
+Footage/
+
+# working material that stays local (not part of the site)
+Squarespace Images/
+_reference/
+profile photos/
+추가이미지영상/

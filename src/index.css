@@ -8,6 +8,17 @@ html {
   scroll-behavior: auto;
 }
 
+/* Column gap of the page's 12-col grid (matches the `g` overlay: gap-4 below sm,
+   gap-6 from sm). Read by frameCols() in Portfolio.jsx. */
+:root {
+  --col-gap: 16px;
+}
+@media (min-width: 640px) {
+  :root {
+    --col-gap: 24px;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -62,4 +73,181 @@ body {
   .hero-section {
     padding-top: 160px;
   }
+}
+
+/* Process step timer: the line under the active step fills over one cycle. */
+@keyframes process-timer {
+  from { width: 0; }
+  to { width: 100%; }
+}
+.process-timer {
+  animation-name: process-timer;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .process-timer { animation: none; width: 100%; }
+}
+
+/* Hero film grain: jump between offsets (steps) so it flickers, never slides. */
+@keyframes hero-grain {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-37px, 52px); }
+  40% { transform: translate(61px, -23px); }
+  60% { transform: translate(-58px, -71px); }
+  80% { transform: translate(29px, 66px); }
+  100% { transform: translate(0, 0); }
+}
+.hero-grain {
+  animation: hero-grain 0.42s steps(1) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-grain { animation: none; }
+}
+
+/* Home hero headline from md up. The text column is 6 of 12 columns, roughly
+   50vw - 51px wide, and the longer line ("The [medium] changes.", mono word in
+   coral brackets) needs about 11.2px of width per px of type; the slope below
+   keeps it on one line with ~4% to spare at every width, and stops at 60px.
+   Below md the default text-3xl applies. */
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: clamp(28px, calc(4.3vw - 4.4px), 60px);
+    line-height: 1;
+  }
+}
+
+/* Hero "medium" word swap: lift out, rise in. Matches the Selected Work title roll. */
+@keyframes hero-word-in {
+  from { opacity: 0; transform: translateY(0.35em); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes hero-word-out {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-0.35em); }
+}
+.hero-word-in { display: inline-block; animation: hero-word-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero-word-out { display: inline-block; animation: hero-word-out 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* Site colour: coral (CTA_CORAL in Portfolio.jsx). Here: the CTA arrow turns
+   coral on hover, on the dark ground and the cream band alike; !important
+   beats the arrow's inline currentColor. */
+:root {
+  --coral: #f2483a;
+}
+/* Every [ Label -> ] arrow is coral at rest: the one mark that says "this goes
+   somewhere". Hover only nudges it. */
+.cta-arrow {
+  color: var(--coral) !important;
+  transition: transform 0.2s ease;
+}
+
+/* Coral circle CTA (home hero). The arrow points down to the work and eases down
+   on hover; the circle grows a touch. Focus ring for keyboards only. */
+.cta-circle {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cta-circle:hover,
+.cta-circle:focus-visible {
+  transform: scale(1.06);
+}
+.cta-circle-arrow {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cta-circle:hover .cta-circle-arrow,
+.cta-circle:focus-visible .cta-circle-arrow {
+  transform: translateY(4px);
+}
+.cta-circle:focus {
+  outline: none;
+}
+.cta-circle:focus-visible {
+  outline: 1px solid #ebe8e4;
+  outline-offset: 4px;
+}
+
+/* Hero changing word: a design-tool selection box. The frame sits a hair outside
+   the word (the slot carries 0.16em side margins so it never touches the
+   neighbouring words); handles are 6px squares centred on the corners. */
+.hero-sel {
+  /* The changing word as selected text: a solid light field behind it, the word
+     itself in the dark ground colour. Sits under the word (z -1 inside the
+     slot's own stacking context). */
+  position: absolute;
+  left: -0.1em;
+  right: -0.1em;
+  top: 0.02em;
+  bottom: -0.1em;
+  z-index: -1;
+  background: #ebe8e4;
+  pointer-events: none;
+}
+/* Hangul fills the line box from the top, so the Korean field sits higher to
+   keep equal air above and below the glyphs. */
+.hero-sel.ko {
+  top: -0.1em;
+  bottom: -0.02em;
+}
+/* Words travelling in and out are clipped to the field, so a wider incoming
+   word never shows past its edge while the slot is still widening. */
+.hero-slot {
+  clip-path: inset(0.02em -0.1em -0.1em -0.1em);
+}
+.hero-slot.ko {
+  clip-path: inset(-0.1em -0.1em -0.02em -0.1em);
+}
+
+
+/* Process timer: the outer span is the 4-column track, the inner fill grows. */
+.process-timer {
+  animation: none;
+  width: 100%;
+}
+.process-timer-fill {
+  animation-name: process-timer;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .process-timer-fill { animation: none; width: 100%; }
+}
+
+
+
+/* Statement portrait: the background layer drifts and breathes behind the still
+   figure. Scaled past 1 so its edges never show inside the frame. */
+@keyframes portrait-drift {
+  from { transform: scale(1.07) translate(-1.4%, 0.8%); }
+  to { transform: scale(1.12) translate(1.4%, -0.8%); }
+}
+.portrait-drift {
+  animation: portrait-drift 14s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .portrait-drift { animation: none; transform: scale(1.07); }
+}
+
+/* II case stepper: the time left on the current step */
+@keyframes inv-step { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* Headlines break evenly, paragraphs avoid a lone last word. */
+h1, h2, h3 { text-wrap: balance; }
+p, li, dd, figcaption { text-wrap: pretty; }
+
+/* Phones: the fixed nav steps aside on the way down and returns, on its own
+   ground, on the way up (data attributes set from Portfolio.jsx). */
+.nav-scrim { opacity: 0; transition: opacity 0.25s ease, transform 0.35s ease; }
+html[data-nav-scrolled] .nav-scrim { opacity: 1; }
+@media (max-width: 767px) {
+  nav.fixed, .nav-meta { transition: transform 0.35s ease; }
+  html[data-nav-hidden] nav.fixed,
+  html[data-nav-hidden] .nav-meta,
+  html[data-nav-hidden] .nav-scrim { transform: translateY(-140px); }
+}
+
+/* Phones: the menu button replaces the stacked nav, so the hero no longer
+   needs the extra top room reserved for it on touch. */
+@media (pointer: coarse) and (max-width: 767px) {
+  .hero-section { padding-top: 96px; }
 }
