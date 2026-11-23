@@ -3346,7 +3346,7 @@ function InvHeroMark({ paused, color, className = '' }) {
       style={{
         transformBox: 'fill-box',
         transformOrigin: '50% 50%',
-        transform: paused ? 'skewX(19.64deg)' : 'none',
+        transform: 'none',
         clipPath: drawn ? 'inset(0 0 0 0)' : 'inset(100% 0 0 0)',
         transition: `clip-path 1.2s ${WIPE_EASE} ${k * 180}ms, transform 0.8s ${SLIDE_EASE} ${k * 70}ms`
       }}
@@ -3586,8 +3586,8 @@ function InvestingCase({ monoStyle, titleStyle }) {
     <div style={{ color: u.title, fontFamily: titleStyle.fontFamily, overflowX: 'clip' }}>
       {/* 0 · Hero and 01, one white page */}
       <header className="pt-12 md:pt-32" style={{ backgroundColor: WHITE }}>
-        <div className={frame}>
-          <div className="flex items-start justify-between gap-8">
+        <div className={`${frame} flex flex-col md:block`}>
+          <div className="mt-12 flex items-start justify-between gap-8 md:mt-0">
             <dl className="m-0">
               {metaItems.map(([k, v]) => (
                 <div key={k} className="grid grid-cols-[88px_minmax(0,1fr)] gap-x-3 py-0.5">
@@ -3600,16 +3600,26 @@ function InvestingCase({ monoStyle, titleStyle }) {
               type="button"
               onClick={() => setPlaying((p) => !p)}
               aria-label={playing ? t('Pause', '일시정지') : t('Play', '재생')}
-              className="-mr-2 shrink-0 cursor-pointer border-0 bg-transparent p-2"
+              className="-mr-2 hidden shrink-0 cursor-pointer border-0 bg-transparent p-2 md:block"
             >
               <InvHeroMark paused={!playing} color={u.title} className="h-9 w-auto md:h-12" />
             </button>
           </div>
-          <p className="m-0 mt-12 text-left text-3xl leading-[1.2] md:mt-32 md:text-right md:text-[48px]" style={{ ...titleStyle, color: u.title }}>
+          <div className="order-first md:order-none md:mt-32">
+            <button
+              type="button"
+              onClick={() => setPlaying((p) => !p)}
+              aria-label={playing ? t('Pause', '일시정지') : t('Play', '재생')}
+              className="-ml-1 mb-4 block cursor-pointer border-0 bg-transparent p-1 md:hidden"
+            >
+              <InvHeroMark paused={!playing} color={u.title} className="h-8 w-auto" />
+            </button>
+          <p className="m-0 text-left text-3xl leading-[1.2] md:text-right md:text-[48px]" style={{ ...titleStyle, color: u.title }}>
             <span style={{ fontWeight: 400 }}>{t('2024–Now', '2024–현재')}</span>
             <br />
             <span style={{ fontWeight: 600 }}>Intelligent Investing</span>
           </p>
+          </div>
         </div>
 
         <div className={`${frame} mt-20 md:mt-64`}>
@@ -4007,8 +4017,8 @@ function CaseHero({ monoStyle, titleStyle, metaItems, years, name, label, headli
   const { u, frame, grid, labelCls, labelStyle, semi, bodyP } = k;
   return (
     <div className="pt-12 md:pt-32">
-      <div className={frame}>
-        <div className="flex items-start justify-between gap-8">
+      <div className={`${frame} flex flex-col md:block`}>
+        <div className="mt-12 flex items-start justify-between gap-8 md:mt-0">
           <dl className="m-0">
             {metaItems.map(([a, b]) => (
               <div key={a} className="grid grid-cols-[88px_minmax(0,1fr)] gap-x-3 py-0.5">
@@ -4017,13 +4027,16 @@ function CaseHero({ monoStyle, titleStyle, metaItems, years, name, label, headli
               </div>
             ))}
           </dl>
-          {mark && <div className="shrink-0 pt-1">{mark}</div>}
+          {mark && <div className="hidden shrink-0 pt-1 md:block">{mark}</div>}
         </div>
-        <p className="m-0 mt-12 text-left text-3xl leading-[1.2] md:mt-32 md:text-right md:text-[48px]" style={{ ...titleStyle, color: u.title }}>
-          <span style={{ fontWeight: 400 }}>{years}</span>
-          <br />
-          <span style={{ fontWeight: 600 }}>{name}</span>
-        </p>
+        <div className="order-first md:order-none md:mt-32">
+          {mark && <div className="mb-4 h-8 md:hidden [&>svg]:h-8 [&>svg]:w-auto">{mark}</div>}
+          <p className="m-0 text-left text-3xl leading-[1.2] md:text-right md:text-[48px]" style={{ ...titleStyle, color: u.title }}>
+            <span style={{ fontWeight: 400 }}>{years}</span>
+            <br />
+            <span style={{ fontWeight: 600 }}>{name}</span>
+          </p>
+        </div>
       </div>
       <div className={`${frame} mt-20 md:mt-64`}>
         <div className={grid}>
