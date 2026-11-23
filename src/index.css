@@ -251,3 +251,6 @@ html[data-nav-scrolled] .nav-scrim { opacity: 1; }
 @media (pointer: coarse) and (max-width: 767px) {
   .hero-section { padding-top: 96px; }
 }
+
+/* A tap should not leave a focus box behind; keyboard focus still shows. */
+button:focus:not(:focus-visible), a:focus:not(:focus-visible) { outline: none; }
